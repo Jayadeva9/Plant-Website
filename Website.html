@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Green Thumb Plant Shop (India)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Message Box for user feedback -->
+    <div id="message-box" class="fixed inset-x-0 bottom-4 mx-auto w-fit z-50 transition-all duration-300 transform translate-y-full opacity-0">
+        <div class="bg-lime-600 text-white px-6 py-3 rounded-full shadow-lg flex items-center gap-2">
+            <i class="fas fa-check-circle"></i>
+            <span id="message-text"></span>
+        </div>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-40 bg-white shadow-sm">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-lime-600">The Green Thumb</a>
+            <div class="flex items-center gap-6">
+                <a href="#products" class="text-slate-600 hover:text-lime-600 transition-colors duration-200 hidden md:block">Shop</a>
+                <a href="#featured" class="text-slate-600 hover:text-lime-600 transition-colors duration-200 hidden md:block">Featured</a>
+                <div class="relative">
+                    <button id="cart-btn" class="text-slate-600 hover:text-lime-600 transition-colors duration-200">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="cart-counter" class="absolute -top-1 -right-2 bg-lime-600 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center p-1 font-medium">0</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative h-[60vh] md:h-[70vh] flex items-center justify-center text-center overflow-hidden">
+        <!-- Hero Background Image -->
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://placehold.co/1920x1080/c8e6c9/2e7d32?text=Fresh+Plants+and+Seeds');"></div>
+        <!-- Overlay for better text readability -->
+        <div class="absolute inset-0 bg-black opacity-30"></div>
+        <div class="relative z-10 p-6 md:p-8 rounded-lg">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4">Grow Your Own Green Oasis</h1>
+            <p class="text-lg md:text-xl text-white mb-8 max-w-xl mx-auto">Discover our curated collection of indoor plants, garden seeds, and essential tools.</p>
+            <a href="#products" class="bg-lime-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-lime-700 transition-colors duration-300 shadow-xl">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- Product Grid Section -->
+    <main id="products" class="container mx-auto px-4 py-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Our Products</h2>
+
+        <!-- Search Bar -->
+        <div class="flex justify-center mb-8">
+            <input type="text" id="search-input" placeholder="Search for a plant or seed..." class="w-full max-w-md px-5 py-3 rounded-full border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-lime-500 shadow-sm transition-all duration-200">
+        </div>
+
+        <!-- Product Cards Container -->
+        <div id="product-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <!-- Product Cards will be injected here by JavaScript -->
+        </div>
+    </main>
+
+    <!-- Featured Section -->
+    <section id="featured" class="bg-slate-100 py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Featured Items</h2>
+            <!-- Another product grid for featured items -->
+            <div id="featured-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                <!-- Featured Product Cards will be injected here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-white py-12">
+        <div class="container mx-auto px-4 text-center md:flex md:justify-between md:items-center">
+            <div class="mb-6 md:mb-0">
+                <p>&copy; 2023 The Green Thumb. All rights reserved.</p>
+            </div>
+            <div class="flex justify-center md:justify-end gap-6 text-2xl">
+                <a href="#" class="hover:text-lime-400 transition-colors duration-200"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-lime-400 transition-colors duration-200"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="hover:text-lime-400 transition-colors duration-200"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Array of product data
+        const products = [{
+                id: 1,
+                name: 'Monstera Deliciosa',
+                price: 25.00,
+                category: 'plant',
+                image: 'https://placehold.co/400x400/80C282/FFFFFF?text=Monstera',
+                description: 'A popular indoor plant with iconic split leaves.'
+            },
+            {
+                id: 2,
+                name: 'Succulent Mix Seeds',
+                price: 8.50,
+                category: 'seed',
+                image: 'https://placehold.co/400x400/C8E6C9/2E7D32?text=Succulent+Seeds',
+                description: 'Assorted seeds for growing your own unique succulents.'
+            },
+            {
+                id: 3,
+                name: 'Peace Lily',
+                price: 18.00,
+                category: 'plant',
+                image: 'https://placehold.co/400x400/96B89A/FFFFFF?text=Peace+Lily',
+                description: 'Elegant plant known for its beautiful white flowers.'
+            },
+            {
+                id: 4,
+                name: 'Sunflower Seeds',
+                price: 5.00,
+                category: 'seed',
+                image: 'https://placehold.co/400x400/FFF89A/5D4037?text=Sunflower+Seeds',
+                description: 'Classic seeds for growing tall, vibrant sunflowers.'
+            },
+            {
+                id: 5,
+                name: 'Fiddle Leaf Fig',
+                price: 35.00,
+                category: 'plant',
+                image: 'https://placehold.co/400x400/9FBC9F/FFFFFF?text=Fiddle+Leaf+Fig',
+                description: 'A stylish and popular indoor tree with large, waxy leaves.'
+            },
+            {
+                id: 6,
+                name: 'Basil Seeds',
+                price: 4.50,
+                category: 'seed',
+                image: 'https://placehold.co/400x400/98C87F/FFFFFF?text=Basil+Seeds',
+                description: 'Easy-to-grow herb seeds for cooking and fresh salads.'
+            },
+            {
+                id: 7,
+                name: 'Zz Plant',
+                price: 22.00,
+                category: 'plant',
+                image: 'https://placehold.co/400x400/C6DBC5/4CAF50?text=ZZ+Plant',
+                description: 'A hardy, low-maintenance plant perfect for beginners.'
+            },
+            {
+                id: 8,
+                name: 'Lavender Seeds',
+                price: 7.00,
+                category: 'seed',
+                image: 'https://placehold.co/400x400/B2A0D3/FFFFFF?text=Lavender+Seeds',
+                description: 'Seeds for growing fragrant and beautiful lavender.'
+            },
+        ];
+
+        // An array for our shopping cart
+        let cart = [];
+
+        // DOM elements
+        const productContainer = document.getElementById('product-container');
+        const featuredContainer = document.getElementById('featured-container');
+        const cartCounter = document.getElementById('cart-counter');
+        const searchInput = document.getElementById('search-input');
+        const messageBox = document.getElementById('message-box');
+        const messageText = document.getElementById('message-text');
+
+        // Function to create a product card HTML element
+        const createProductCard = (product) => {
+            return `
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+                    <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-slate-900 mb-2">${product.name}</h3>
+                        <p class="text-lime-600 font-bold text-lg mb-4">₹${product.price.toFixed(2)}</p>
+                        <p class="text-slate-500 text-sm mb-4">${product.description}</p>
+                        <button onclick="addToCart(${product.id})" class="add-to-cart-btn bg-lime-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-lime-700 transition-colors duration-300 w-full">Add to Cart</button>
+                    </div>
+                </div>
+            `;
+        };
+
+        // Function to render products
+        const renderProducts = (productsToRender) => {
+            productContainer.innerHTML = ''; // Clear previous products
+            if (productsToRender.length === 0) {
+                productContainer.innerHTML = '<p class="col-span-full text-center text-slate-500 text-lg mt-8">No products found. Try a different search term!</p>';
+                return;
+            }
+            productsToRender.forEach(product => {
+                productContainer.innerHTML += createProductCard(product);
+            });
+        };
+
+        // Function to render featured products (first 3 plants)
+        const renderFeaturedProducts = () => {
+            const featuredItems = products.filter(p => p.category === 'plant').slice(0, 3);
+            featuredContainer.innerHTML = ''; // Clear previous products
+            featuredItems.forEach(product => {
+                featuredContainer.innerHTML += createProductCard(product);
+            });
+        };
+
+        // Function to add an item to the cart
+        const addToCart = (productId) => {
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                cart.push(product);
+                updateCartCounter();
+                showMessage(`${product.name} added to cart!`);
+            }
+        };
+
+        // Function to update the cart counter
+        const updateCartCounter = () => {
+            cartCounter.textContent = cart.length;
+        };
+
+        // Function to show a temporary message box
+        const showMessage = (text) => {
+            messageText.textContent = text;
+            messageBox.classList.remove('translate-y-full', 'opacity-0');
+            messageBox.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                messageBox.classList.remove('translate-y-0', 'opacity-100');
+                messageBox.classList.add('translate-y-full', 'opacity-0');
+            }, 3000);
+        };
+
+        // Event listener for search input
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredProducts = products.filter(product =>
+                product.name.toLowerCase().includes(searchTerm) ||
+                product.description.toLowerCase().includes(searchTerm)
+            );
+            renderProducts(filteredProducts);
+        });
+
+        // Initialize the page on load
+        window.onload = () => {
+            renderProducts(products); // Render all products initially
+            renderFeaturedProducts(); // Render featured products
+            updateCartCounter(); // Set initial cart count to 0
+        };
+    </script>
+</body>
+
+</html>
